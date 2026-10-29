@@ -1,0 +1,84 @@
+
+.ticket-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.ticket-filters input,
+.ticket-filters select {
+  min-width: 145px;
+}
+
+.ticket-title-cell {
+  min-width: 210px;
+}
+
+.ticket-title-cell strong,
+.ticket-title-cell span {
+  display: block;
+}
+
+.ticket-title-cell span {
+  margin-top: 3px;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.ticket-detail {
+  display: grid;
+  gap: 18px;
+}
+
+.ticket-detail-description {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.comment-list {
+  display: grid;
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.comment {
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: var(--surface-alt);
+}
+
+.comment-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.comment-body {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.history-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.history-item {
+  padding: 12px 14px;
+  border-left: 3px solid var(--lavender);
+  border-radius: 0 10px 10px 0;
+  background: var(--bg-secondary);
+}
+
+.history-item p {
+  margin: 5px 0 0;
+  color: var(--text-secondary);
+  overflow-wrap: anywhere;
+}

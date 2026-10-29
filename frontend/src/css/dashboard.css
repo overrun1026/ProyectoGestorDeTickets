@@ -1,0 +1,88 @@
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  position: relative;
+  overflow: hidden;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.stat-card::after {
+  position: absolute;
+  right: -20px;
+  bottom: -35px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--stat-tint, var(--primary-soft));
+  content: "";
+  opacity: 0.75;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.stat-value {
+  display: block;
+  margin-top: 12px;
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.stat-card.total { --stat-tint: #dce5f3; }
+.stat-card.open { --stat-tint: #e1e9f7; }
+.stat-card.progress { --stat-tint: #eee8f8; }
+.stat-card.resolved { --stat-tint: #dff0eb; }
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 1fr);
+  gap: 22px;
+}
+
+.stat-summary {
+  display: grid;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 35px;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-track {
+  height: 9px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: var(--surface-alt);
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--primary);
+}
+
+.progress-fill.lavender { background: var(--lavender); }
+.progress-fill.teal { background: var(--teal); }
+.progress-fill.amber { background: var(--amber); }
+
+.category-card::after {
+  display: none;
+}

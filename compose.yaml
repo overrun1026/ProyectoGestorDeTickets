@@ -1,0 +1,52 @@
+
+# Coordina PostgreSQL, backend y frontend de HelpDesk.
+services:
+  db:
+    build:
+      context: ./db
+    environment:
+      POSTGRES_DB: helpdesk
+      POSTGRES_USER: helpdesk
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Define POSTGRES_PASSWORD en el archivo .env de la raíz}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U helpdesk -d helpdesk"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgresql://helpdesk:${POSTGRES_PASSWORD}@db:5432/helpdesk
+      JWT_SECRET: ${JWT_SECRET:?Define JWT_SECRET en el archivo .env de la raíz}
+      JWT_EXPIRES_IN: 1h
+      FRONTEND_URL: http://localhost:8080
+      DB_SSL: "false"
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      VITE_API_URL: /api
+      DOCKER: "true"
+    ports:
+      - "8080:5173"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

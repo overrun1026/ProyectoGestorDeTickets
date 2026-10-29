@@ -1,0 +1,147 @@
+
+@import url("./variables.css");
+@import url("./layout.css");
+@import url("./components.css");
+@import url("./dashboard.css");
+@import url("./tickets.css");
+@import url("./forms.css");
+@import url("./responsive.css");
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family:
+    Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(136, 112, 181, 0.45);
+  outline-offset: 2px;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+.initial-loader {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+.empty-state {
+  padding: 36px 20px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.muted {
+  color: var(--text-secondary);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.page-heading {
+  margin-bottom: 24px;
+}
+
+.page-heading h1 {
+  margin: 0 0 6px;
+  font-size: clamp(24px, 3vw, 30px);
+  letter-spacing: -0.8px;
+}
+
+.page-heading p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.error-message {
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  color: #8e3541;
+  background: var(--danger-soft);
+}
+
+.success-message {
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  color: #245b50;
+  background: var(--teal-soft);
+}
+/* Contador de notificaciones sin leer */
+.notification-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background-color: #dc3545;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.notification-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link .notification-count {
+  margin-left: auto;
+}

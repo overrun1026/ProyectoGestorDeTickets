@@ -1,0 +1,10 @@
+
+# Este archivo excluye las dependencias, los secretos y los archivos
+# temporales para mantener el repositorio limpio y seguro.
+node_modules/
+.env
+.env.*
+!.env.example
+coverage/
+npm-debug.log*
+.DS_Store

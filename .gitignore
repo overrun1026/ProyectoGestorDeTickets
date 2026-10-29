@@ -1,0 +1,77 @@
+
+# ==========================================
+# VARIABLES DE ENTORNO Y SECRETOS
+# ==========================================
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Certificados y claves privadas
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+
+# ==========================================
+# DEPENDENCIAS DE NODE.JS
+# ==========================================
+node_modules/
+**/node_modules/
+
+# ==========================================
+# LOGS
+# ==========================================
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# ==========================================
+# ARCHIVOS GENERADOS Y TEMPORALES
+# ==========================================
+tmp/
+temp/
+.cache/
+.parcel-cache/
+.vite/
+coverage/
+.nyc_output/
+
+# ==========================================
+# SISTEMAS OPERATIVOS Y EDITORES
+# ==========================================
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ==========================================
+# DOCKER Y BASES DE DATOS LOCALES
+# ==========================================
+*.pid
+*.sock
+*.dump
+*.bak
+*.backup
+*.sqlite
+*.sqlite3
+
+# ==========================================
+# VARIABLES DE HERRAMIENTAS Y COMPILACIÓN
+# ==========================================
+dist/
+build/
+out/
+
+# ==========================================
+# ARCHIVOS DE PRUEBA LOCALES
+# ==========================================
+.env.test.local

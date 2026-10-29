@@ -1,0 +1,181 @@
+
+# Este archivo documenta los endpoints principales de HelpDesk mediante
+# OpenAPI para facilitar la consulta y las pruebas de la API.
+openapi: 3.0.3
+info:
+  title: HelpDesk API
+  version: 1.0.0
+  description: API REST para la gestión de tickets de soporte.
+
+servers:
+  - url: http://localhost:3000
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Ticket:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        priority:
+          type: string
+          enum: [low, medium, high, critical]
+        status:
+          type: string
+          enum: [open, in_progress, resolved, closed]
+
+paths:
+  /health:
+    get:
+      summary: Comprueba el estado de la API
+      responses:
+        "200":
+          description: API disponible
+
+  /api/auth/register:
+    post:
+      summary: Registra un usuario
+      responses:
+        "201":
+          description: Usuario creado
+        "400":
+          description: Datos inválidos
+
+  /api/auth/login:
+    post:
+      summary: Inicia sesión
+      responses:
+        "200":
+          description: Token JWT emitido
+        "401":
+          description: Credenciales incorrectas
+
+  /api/auth/me:
+    get:
+      summary: Consulta el usuario autenticado
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Usuario autenticado
+        "401":
+          description: Falta un token válido
+
+  /api/tickets:
+    get:
+      summary: Lista los tickets accesibles para el usuario
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [open, in_progress, resolved, closed]
+        - name: priority
+          in: query
+          schema:
+            type: string
+            enum: [low, medium, high, critical]
+      responses:
+        "200":
+          description: Listado de tickets
+
+    post:
+      summary: Crea un ticket
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title, description]
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                categoryId:
+                  type: integer
+                priority:
+                  type: string
+                  enum: [low, medium, high, critical]
+      responses:
+        "201":
+          description: Ticket creado
+        "400":
+          description: Datos inválidos
+        "401":
+          description: No autenticado
+
+  /api/tickets/{ticketId}:
+    get:
+      summary: Consulta un ticket
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ticketId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Ticket encontrado
+        "403":
+          description: Sin permisos
+        "404":
+          description: Ticket no encontrado
+
+    patch:
+      summary: Actualiza un ticket
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ticketId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Ticket actualizado
+
+    delete:
+      summary: Elimina un ticket como administrador
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: ticketId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Ticket eliminado
+        "403":
+          description: Sin permisos
